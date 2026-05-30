@@ -133,4 +133,4 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'jatinchaubey28@gmail.com'  # Aapka Gmail address
-EMAIL_HOST_PASSWORD = 'oohmrfefbzonxsii'  # Gmail App Password (Normal password nahi)
+EMAIL_HOST_PASSWORD = 'oohm rfef bzon xsii'  # Gmail App Password (Normal password nahi)
