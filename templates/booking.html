@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="back_re">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title">
+                    <h2>Complete Your Booking</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <form id="request" class="main_form" method="POST" action="{% url 'booking' %}" style="background: #ffffff; padding: 40px; border-radius: 15px; box-shadow: 0px 10px 30px rgba(0,0,0,0.15);">
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label style="color: #333; font-weight: 600;">Full Name</label>
+                            <input class="contactus" type="text" name="guest_name" placeholder="Enter your full name" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label style="color: #333; font-weight: 600;">Email Address</label>
+                            <input class="contactus" type="email" name="guest_email" placeholder="Enter your email" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label style="color: #333; font-weight: 600;">Mobile Number</label>
+                            <input class="contactus" type="text" name="guest_mobile" placeholder="Enter phone number" required>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label style="color: #333; font-weight: 600;">Selected Room Type</label>
+                            <input class="contactus" type="text" name="room_type" value="{{ request.GET.type|default:'Standard Room' }}" readonly style="background-color: #f1f3f5; cursor: not-allowed; border: 1px dashed #adb5bd !important;">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label style="color: #333; font-weight: 600;">Arrival Date</label>
+                            <input class="contactus" type="date" name="arrival" id="arrival_date" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label style="color: #333; font-weight: 600;">Departure Date</label>
+                            <input class="contactus" type="date" name="departure" id="departure_date" required>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label style="color: #333; font-weight: 600;">Payment Mode</label>
+                            <select name="payment" class="contactus" style="margin-bottom: 25px; height: 50px;">
+                                <option value="Online">Online Payment</option>
+                                <option value="Cash">Cash at Hotel</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-12">
+                            <button type="submit" class="send_btn" style="background: #000; color: #fff; width: 100%; border-radius: 30px; text-transform: uppercase; font-weight: bold; padding: 15px; border: none; transition: 0.3s;">
+                                Confirm Booking & Send Email
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .contactus {
+        border: 1px solid #ced4da !important;
+        margin-bottom: 20px !important;
+        padding: 12px 15px !important;
+        border-radius: 8px !important;
+        width: 100%;
+        color: #333 !important;
+        font-size: 15px;
+    }
+    .contactus:focus {
+        border-color: #000 !important;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+    .back_re {
+        background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('{% static "images/booking-bg.jpg" %}'); /* Background image path */
+        background-size: cover;
+        padding: 60px 0;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+    .title h2 {
+        color: #fff;
+        font-size: 35px;
+        letter-spacing: 2px;
+        margin: 0;
+    }
+    label {
+        margin-bottom: 8px;
+        display: block;
+        font-size: 14px;
+    }
+    .send_btn:hover {
+        background: #333 !important;
+        letter-spacing: 1px;
+    }
+</style>
+
+<script>
+    document.getElementById('arrival_date').min = new Date().toISOString().split("T")[0];
+    document.getElementById('departure_date').min = new Date().toISOString().split("T")[0];
+</script>
+{% endblock content %}

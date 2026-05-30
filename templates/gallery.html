@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+      <div class="back_re">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="title">
+                    <h2>Our Gallery</h2>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="gallery">
+         <div class="container">
+            <div class="row">
+               {% for item in gallery_items %}
+               <div class="col-md-3 col-sm-6">
+                  <div class="gallery_img">
+                     {% if item.image %}
+                        <figure><img src="{{ item.image.url }}" alt="Gallery Image {{ forloop.counter }}"/></figure>
+                     {% else %}
+                        <figure><img src="{% static 'images/gallery1.jpg' %}" alt="Placeholder"/></figure>
+                     {% endif %}
+                  </div>
+               </div>
+               {% empty %}
+               <div class="col-md-12 text-center">
+                   <p>No images found in the gallery. Please add some in the Admin panel.</p>
+               </div>
+               {% endfor %}
+            </div>
+         </div>
+      </div>
+      {% endblock content %}

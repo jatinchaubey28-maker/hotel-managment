@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+      <div class="back_re">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="title">
+                    <h2>Our Accommodations</h2>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="our_room">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="titlepage">
+                     <p class="margin_0">Discover our collection of premium rooms and suites, each designed to offer a unique blend of comfort and elegance.</p>
+                  </div>
+               </div>
+            </div>
+            
+            <div class="row">
+               {% for room in rooms %}
+               <div class="col-md-4 col-sm-6">
+                  <div id="serv_hover" class="room">
+                     <div class="room_img">
+                        <figure>
+                           {% if room.room_image %}
+                              <img src="{{ room.room_image.url }}" alt="{{ room.room_type }}" style="height: 280px; width: 100%; object-fit: cover;"/>
+                           {% else %}
+                              <img src="{% static 'images/room1.jpg' %}" alt="Default room image" style="height: 280px; width: 100%; object-fit: cover;"/>
+                           {% endif %}
+                        </figure>
+                     </div>
+                     <div class="bed_room">
+                        <h3>{{ room.room_type }}</h3>
+                        <p>{{ room.description|default:"Experience the ultimate comfort in our well-appointed rooms."|truncatewords:20 }}</p>
+                        
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                           {% if room.price %}
+                              <span style="color: #ff3c00; font-size: 22px; font-weight: bold;">₹{{ room.price }} <small style="color: #666; font-size: 14px;">/ Night</small></span>
+                           {% endif %}
+                        </div>
+                        
+                        <div class="mt-3">
+                           <a href="{% url 'booking' %}?type={{ room.room_type }}" class="btn btn-danger" style="background-color: #ff3c00; border: none; padding: 10px 20px; width: 100%;">Book This Room</a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               {% empty %}
+               <div class="col-md-12 text-center">
+                  <div class="alert alert-warning py-5">
+                     <h3>No Rooms Available Right Now</h3>
+                     <p>We are currently updating our inventory. Please check back later.</p>
+                     <a href="{% url 'contact' %}" class="btn btn-primary mt-2">Contact Us for Inquiry</a>
+                  </div>
+               </div>
+               {% endfor %}
+            </div>
+         </div>
+      </div>
+      <div class="about" style="background: #f8f8f8; padding-top: 50px; padding-bottom: 50px;">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-4">
+                  <div class="titlepage text-center">
+                     <i class="fa fa-wifi" style="font-size: 30px; color: #ff3c00;"></i>
+                     <h4 class="mt-2">Free Wi-Fi</h4>
+                     <p>High-speed internet access in all our premium rooms.</p>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="titlepage text-center">
+                     <i class="fa fa-coffee" style="font-size: 30px; color: #ff3c00;"></i>
+                     <h4 class="mt-2">24/7 Room Service</h4>
+                     <p>Delicious meals delivered right to your door, any time.</p>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="titlepage text-center">
+                     <i class="fa fa-swimming-pool" style="font-size: 30px; color: #ff3c00;"></i>
+                     <h4 class="mt-2">Pool Access</h4>
+                     <p>Complimentary access to our luxury rooftop swimming pool.</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <br><br>
+{% endblock content %}
